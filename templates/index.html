@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+        <form action="/" method="post" enctype = "multipart/form-data">
+            <div class="form-group">
+                <input type="file" id="myFile" name="image">
+            </div>
+            <button class="btn btn-primary" type="submit">Analyze</button>
+        </form>
+    
+        {% if uploaded_image %}
+            <br/>
+            <br/>
+            <h2>The detection images</h2>>
+            <br/>
+            <img src="{{ url_for('send_uploaded_file', filename=uploaded_image) }}" />
+            <br/>
+            <br/>
+
+            <br/>
+            <br/>
+            <br/>
+            <h2>Object Counts</h2>
+            <br/>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Object</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for k,v in objects.items() %}
+                        <tr>
+                            <td>{{ k }}</td>
+                            <td>{{ v }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+
+        {% endif %}
+        
+        
+{% endblock %}
